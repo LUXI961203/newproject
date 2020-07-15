@@ -34,3 +34,45 @@ python3 -V
 pip3 -V
 ##新接触的Linux命令
 补全安装包：yum install -y bash-completion
+
+##Markdown命令
+笔记上传
+ git status  （查看状态）
+ git add .  （增加新的文件，在当前路径）
+ git commit -m "18:16" （上传后看到的标识）
+ git push （上传）
+ ls  
+ rm -fr kkk.md
+ git add .
+ git commit -m "18:17"
+ git push
+ history
+
+#第三天
+##关于Linux中SED的命令
+Linux sed 命令是利用脚本来处理文本文件。
+
+sed 可依照脚本的指令来处理、编辑文本文件。
+
+Sed 主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。
+##参数说明
+-e：可多条命令同时执行；
+ 例如：sed -i -e '1a\newline' -e '2i hello' /tmp/net;
+
+a:新增，a后面跟字符串，这些字符串在当前行的下一行出现（新增一行）；
+例如： sed -i '1a\hello word' /tmp/net （在第一行后插入hello word）
+
+i:插入，i的后面跟字符，这些字符串在当前行的上一行出现（新增一行）
+例如： sed -i '3i\nmtui' /tmp/net（在第三行的前面插入nmtui）
+
+c：取代，c后面可以跟字符串，这些字符串可以取代规定行数之间的字符串；
+例如： sed -i '2,4c gogogo' /tmp/net （将2到4行用gogogo取代）
+
+d：删除，d后面不能跟字符串；
+例如：sed -i '2,4d' /tmp/net（将2到4行删除）
+
+p：打印，选择需要的数据一行都打印出来，通常p参数通常与sed -n一起使用；
+例如：cat /tmp/net | sed -n '/eth0/p'（将含有eth0的行都打印出来）
+
+s：取代，能确定取代掉指定的参数；
+例如：sed -i 's/eth0/eth1/g' /tmp/net（用eth1取代eth0）
