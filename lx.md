@@ -16,29 +16,29 @@ yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel r
 yum install libffi-devel -y
 ```
 
-1. 下载安装包解压
+2. 下载安装包解压
 ```bash
 cd #回到用户目录
 wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
 tar -xvJf  Python-3.7.0.tar.xz
 ```
 
-2. 编译安装python
+3. 编译安装python
 ```bash
 mkdir /usr/local/python3 #创建编译安装目录
 cd Python-3.7.0
 ./configure --prefix=/usr/local/python3
 make && make install
 ```
-
+4. 创建软连接
 ```bash
-3. 创建软连接
 ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
 ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
 ```
 
+
+5. 验证是否成功
 ```bash
-4. 验证是否成功
 python3 -V
 pip3 -V
 ```
