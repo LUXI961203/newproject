@@ -1,42 +1,59 @@
-#第一天
-##小型服务器安装
+# 第一天
+## 小型服务器安装
 dd if=/dev/zero of=/dev/sda bs=4k count=512 
               sh set.ip
               echo /dev/sdb /root/.ssd
               echo /dev/sdf /tmp/install
               vi 以0开头的脚本
               sh 以0开头的脚本
-#第二天
-##Python在Linux系统上的安装
+# 第二天
+## Python在Linux系统上的安装
 Linux中python的安装：
-1.安装编译相关工具
+1. 安装编译相关工具
+```bash
 yum -y groupinstall "Development tools"
 yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
 yum install libffi-devel -y
+```
 
-2.下载安装包解压
+1. 下载安装包解压
+```bash
 cd #回到用户目录
 wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
 tar -xvJf  Python-3.7.0.tar.xz
+```
 
-3.编译安装python
+2. 编译安装python
+```bash
 mkdir /usr/local/python3 #创建编译安装目录
 cd Python-3.7.0
 ./configure --prefix=/usr/local/python3
 make && make install
+```
 
-4.创建软连接
+```bash
+3. 创建软连接
 ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
 ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
+```
 
-5.验证是否成功
+```bash
+4. 验证是否成功
 python3 -V
 pip3 -V
-##新接触的Linux命令
+```
+## 新接触的Linux命令
 补全安装包：yum install -y bash-completion
 
-##Markdown命令
+
+
+
+
+
+## Markdown命令
 笔记上传
+
+```bash
  git status  （查看状态）
  git add .  （增加新的文件，在当前路径）
  git commit -m "18:16" （上传后看到的标识）
@@ -47,15 +64,17 @@ pip3 -V
  git commit -m "18:17"
  git push
  history
+```
 
-#第三天
-##关于Linux中SED的命令
+# 第三天
+## 关于Linux中SED的命令
 Linux sed 命令是利用脚本来处理文本文件。
 
 sed 可依照脚本的指令来处理、编辑文本文件。
 
 Sed 主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。
-##参数说明
+## 参数说明
+```bash
 -e：可多条命令同时执行；
  例如：sed -i -e '1a\newline' -e '2i hello' /tmp/net;
 
@@ -76,3 +95,4 @@ p：打印，选择需要的数据一行都打印出来，通常p参数通常与
 
 s：取代，能确定取代掉指定的参数；
 例如：sed -i 's/eth0/eth1/g' /tmp/net（用eth1取代eth0）
+```
