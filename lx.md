@@ -141,3 +141,22 @@ fi
 python3 -V
 pip3 -V
 ```
+
+## 安装各项服务包的脚本
+```bash
+for srv in samba mariadb httpd targetcli nmap;
+do
+	echo $srv
+	rpm -qa $srv|grep -iq $srv
+	if [ $? = 0 ];then
+		echo 'installed'
+	else
+		yum install -y $srv*
+		if [ $? = 0 ];then
+			systemctl enable $srv.service
+			systemctl start $srv.service
+		fi
+	fi
+done
+exit 1
+```
