@@ -1,5 +1,12 @@
 # 第一天
 ## 小型服务器安装
+Linux dd命令用于读取、转换并输出数据。
+dd可从标准输入或文件中读取数据，根据指定的格式来转换数据，再输出到文件、设备或标准输出。
+if=文件名：输入文件名，默认为标准输入。即指定源文件。
+of=文件名：输出文件名，默认为标准输出。即指定目的文件。
+bs=bytes：同时设置读入/输出的块大小为bytes个字节。
+count=blocks：仅拷贝blocks个块，块大小等于ibs指定的字节数。
+
 dd if=/dev/zero of=/dev/sda bs=4k count=512 
               sh set.ip
               echo /dev/sdb /root/.ssd
@@ -95,4 +102,42 @@ p：打印，选择需要的数据一行都打印出来，通常p参数通常与
 
 s：取代，能确定取代掉指定的参数；
 例如：sed -i 's/eth0/eth1/g' /tmp/net（用eth1取代eth0）
+```
+# 第四天
+## Python安装的脚本
+```bash
+#! /bin/bash
+1. 安装编译相关工具
+yum -y groupinstall "Development tools"
+if [ $? = 0 ];then
+    yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel wget
+else 
+yum --disablerepo='epel' groupinstall "Development Tools"
+fi
+2. 下载安装包解压
+cd /tmp/
+wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
+if [ $? = 0 ];then
+	tar -xvJf  Python-3.7.0.tar.xz
+else
+	echo "step2 failed"
+	exit 1
+fi
+3. 编译安装python
+mkdir /usr/local/python3  //创建编译安装目录
+cd Python-3.7.0
+./configure --prefix=/usr/local/python3
+make && make install
+if [ $? = 0 ];then
+	echo "install finished"
+fi
+4. 创建软连接
+ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
+ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
+if [ $? = 0 ];then
+	echo "install successful"
+fi
+5. 验证是否成功
+python3 -V
+pip3 -V
 ```
