@@ -12,10 +12,10 @@ minios.4.9.0.img  set_ip.sh  //以上文件必须存在；
 ```bash
 write_to_flash.sh的内容：
 #!/bin/sh
-num=$(lsscsi -s|grep 8.00GB|wc -l)
+num=$(lsscsi -s | grep 8.00GB | wc -l)
 i=1
 while [ $i -le $num ]
-do	disk=$(lsscsi -s|grep 8.00GB|awk '{print $7}'|sed -n $i\p)
+do	disk=$(lsscsi -s | grep 8.00GB | awk '{print $7}' | sed -n $i\p)
  	nohup dd if=$1 of=$disk bs=3M  > /dev/null 2>&1 & 
 i=$(($i+1))
 done
@@ -24,10 +24,10 @@ done
 flash_adjust.sh的内容：
 #!/bin/sh
 i=1
-num=$(lsscsi -s|grep 8.00GB|awk '{print $7}'|wc -l)
+num=$(lsscsi -s | grep 8.00GB | awk '{print $7}' | wc -l)
 while [ $i -le $num ]
 	do mkdir -p /disk/usb$i
-           usb=$(lsscsi -s|grep 8.00GB|awk '{print $7}'|sed -n $i\p)
+           usb=$(lsscsi -s | grep 8.00GB | awk '{print $7}' | sed -n $i\p)
            mount $usb'1' /disk/usb$i
 	   cat /root/0_write_to_disk.sh > /disk/usb$i/root/0_write_to_disk.sh 
 	   #cat /root/network.info > /disk/usb$i/network.info
@@ -49,9 +49,11 @@ umount /disk/sata12)
 in `seq 1 $TIMES`;
 do        
 echo $i        
-for dev in `df -h|grep /disk/sata|awk '{print $1}'`;do
+for dev in `df -h | grep /disk/sata | awk '{print $1}'`;
+do
                 dev=${dev%1}                
-nohup dd if=$dev of=/dev/null bs=10M count=50 iflag=direct 1>&2>/dev/null &        done        
+nohup dd if=$dev of=/dev/null bs=10M count=50 iflag=direct 1>&2>/dev/null & 
+done        
 sleep 10
 done
 观察服务器前面板 找到读写指示灯不闪烁的硬盘
