@@ -68,3 +68,55 @@ sh /tmp/tmp.sh
 rm -rf /tmp/tmp.sh4）
 df -h查看硬盘是否挂载成功,恢复服务 systemctl start skypiea
 ```
+## 第二天
+### Python猜数字
+```py
+#coding:utf-8
+#from random import *
+import random as rand  //给导入模块取别名；
+
+def ask (s,n1,n2):
+    while True:
+        try :
+            num = int(input(s))
+            if num in range (n1,n2):
+                return num
+            else:
+                print("犯规")
+        except :
+            print("犯规")
+//读取生命值，并做检查，合法则跳出死循环；
+//def 函数的定义，使用及参数传递的说明；
+
+ming = ask("请输入你有几条命：",1,20)
+fanwei = ask("请输入一个范围：",20,300)
+suiji = rand.randint(1,fanwei)
+
+while True:
+    if ming == 0:
+        print("你死了！,数字是%s" %suiji)
+        break
+    shuzi = int(input("输入一个数字："))
+    if shuzi < suiji:
+        print ("小了")
+        ming -= 1
+    elif shuzi > suiji:
+        print ("大了")
+        ming -= 1
+    else:
+        print ("猜对了！")
+        brea
+```
+## 第三天
+### Python中字符串的方法
+1. find()方法：find()方法用于检测字符串中是否包含子字符串str;
+```py
+find()用法： str.find(str, beg=0, end=len(string));
+str -- 指定检索的字符串
+beg -- 开始索引，默认为0。
+end -- 结束索引，默认为字符串的长度。
+```
+1. Python join() 方法用于将序列中的元素以指定的字符连接生成一个新的字符串。
+```py
+join()用法：
+str.join(sequence)
