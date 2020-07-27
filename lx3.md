@@ -1,6 +1,15 @@
 # 第三周
 ## 第一天
 ### Ansible的安装和基础知识
+```bash
+Ansible的优点：
+1. 仅需管理主机安装并配置即可，所有的配置工作都通过ssh连接下发至被管理主机。
+轻量化
+2. Python编写，源代码可读性强。同时playbook使用yml配置，容易上手
+对于集群和ECS的支持非常完美。
+3. 支持大量API接入，并且对于python的扩展支持良好。
+4. 由于架构出色，理论上在管理主机性能到位的情况下可以同时配置近乎无限的主机。
+```
 1. Ansible的安装
     ```bash
     yum -y install epel-release //安装epel源，来获得更高版本的ansible;
@@ -8,9 +17,9 @@
     ansible --version  //查看ansible的版本;
     ```
 2. 密钥的配置
-   ```bash
-   将管理端的公钥加入到被管理端的.ssh/authorized_keys中
-   ```
+     ```bash
+     将管理端的公钥加入到被管理端的.ssh/authorized_keys中;
+     ```
 3. 将受管理的机器IP加入管理Ansible
     ```bash
     例如：
