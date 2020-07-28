@@ -55,15 +55,31 @@ Ansible的优点：
     others：所有file模块里的选项都可以在这里使用
     src：要复制到远程主机的文件在本地的地址，可以是绝对路径，也可以是相对路径。
 
-    用法： ansible fangwei -m copy -a 'src=/root/ninngenn.cfg dest=/root/ninngenn.cfg force=yes';
+    用法： ansible fangwei -m copy -a 'src=/root/ninngenn.cfg dest=/root/ninngenn.cfg force=yes'; src:当前的路径， dest：目标路径。
 
    4. File模块
     File模块主要是对于文件的一些简单操作，主要是创建或者权限设定，已经文件的存在判断等。
-
+    
     用法： ansible fangwei（定义的组） -m file -a 'path=/root/ninngenn.cfg state=touch';
 
    5. Script模块
     这个模块用于在受管机上执行sh脚本。
 
     用法：ansible test_hosts（定义的组） -m script -a '/tmp/script.sh';
+    ```
+    ## 第二天
+    ### Ansible中的参数
+    ```bash
+    ansible_ssh_host	定义hosts ssh地址	ansible_ssh_host=192.169.1.100
+    ansible_ssh_port	定义hosts ssh端口	ansible_ssh_port=300
+    ansible_ssh_user	定义hosts ssh认证用户	ansible_ssh_user=user
+    ansible_ssh_pass	定义hosts ssh认证密码	ansible_ssh_pass=pass
+    ansible_sudo	        定义hosts sudo用户	ansible_sudo=www
+    ansible_sudo_pass	定义hosts sudo密码	ansible_sudo_pass=pass
+    ansible_sudo_exe	定义hosts sudo路径	ansible_sudo_exe=lusr/bin/sudo
+    ansible_connection	定义hosts连接方式	ansible_connection=local
+    ansible_ssh_private_key_file	定义hosts私钥	ansible_ssh_private_key_file=/root/key
+    ansible_ssh_shell_type	        定义hosts shell类型	ansible_ssh_shell_type=bash
+    ansible_python_interpreter 	定义hosts任务执行python路径	ansible_python_interpreter=/usr/bin/python2.6
+    ansible_*_interpreter	        定义hosts其它语言解析路径	ansible_*_interpreter=/usribin/ruby
     ```
