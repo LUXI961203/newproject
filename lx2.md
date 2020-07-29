@@ -9,7 +9,6 @@ sh flash_adjust.sh  //调整U盘的文件
 0_write_to_disk.sh(需要注释里面的内容)  flash_adjust.sh   write_to_flash.sh
 minios.4.9.0.img  set_ip.sh  //以上文件必须存在；
 ```
-1
 ```bash
 write_to_flash.sh的内容：
 #!/bin/sh
