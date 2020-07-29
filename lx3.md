@@ -83,3 +83,37 @@ Ansible的优点：
     ansible_python_interpreter 	定义hosts任务执行python路径	ansible_python_interpreter=/usr/bin/python2.6
     ansible_*_interpreter	        定义hosts其它语言解析路径	ansible_*_interpreter=/usribin/ruby
     ```
+    ## 第三天
+    ### 服务器上架
+    1. 链路聚合
+     ```bash
+     1. cd /etc/sysconfig/network-script/
+     2. touch ifcfg-band0 //自己创建一个band0文件
+     3. vim ifcfg-bond0
+        DEVICE=bond0
+        ONBOOT=yes
+        IPADDR=111.111.111.111
+        PREFIX＝24
+        GATEWAY=111.111.111.1
+        BONDING_MASTER=yes
+        BONDING_OPTS="miimon=100 mode=2 xmit_hash_policy=1"
+     4. vim ifcfg-eth0和ifcfg-eth1 //将两张网卡绑定在一起
+        IPADDR=
+        MASTER=bond0
+        SLAVE=yes
+     5. systemclt restart network
+     6. echo nameserver 114.114.114.114 >> /etc/resolv.conf //配置DNS
+     7. systemclt stop firewalld //关闭防火墙
+     8. systemclt disable firewalld //开机不自行启动
+     9. setenforce 0 //要到配置文件永久关闭
+     10. sed -i 's/#Port 22/Port 65422/g' /etc/ssh/sshd_config //将端口改为65422
+     11. systemclt restart sshd //重启ssd
+     12.  sh adjust_centos7.sh //网络配置好就可以执行此脚本，
+    ```
+    2. 检验服务器是否搭建完成
+    ```bash
+        fdisk -l | grep 2000 | wc -l //查看2T盘的数量
+        cat /proc/cpuinfo | grep processor | wc -l //查看cpu的线程数
+        free -g //检查内存；
+        ethtool bond0 | grep Speed  //查看网络速率
+    ```
