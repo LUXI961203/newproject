@@ -1,8 +1,3 @@
----
-title: Week Three
-date: 2020-07-31 10:41:25
-tags:
----
 # 第三周
 ## 第一天
 ### Ansible的安装和基础知识
