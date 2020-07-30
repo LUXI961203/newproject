@@ -1,3 +1,8 @@
+---
+title: Week Three
+date: 2020-07-31 10:41:25
+tags:
+---
 # 第三周
 ## 第一天
 ### Ansible的安装和基础知识
@@ -117,3 +122,34 @@ Ansible的优点：
         free -g //检查内存；
         ethtool bond0 | grep Speed  //查看网络速率；
     ```
+## 第四天
+### H3C交换机配置
+1. 接口IP地址配置
+```bash
+进入系统视图：system-view;
+进入接口视图：interface interface-type interface-number;
+配置接口的IP地址：ip address ip-address { mask-length | mask } [ sub ];
+例如：
+<Switch> system-view;
+[Switch] interface vlan-interface 1;
+[Switch-Vlan-interface1] ip address 172.16.1.1 255.255.255.0;
+[Switch-Vlan-interface1] ip address 172.16.2.1 255.255.255.0 sub;
+
+IP地址的显示:
+显示三层接口的相关信息:display ip interface [ interface-type interface-number ] [ | { begin | exclude | include } regular-expression ];
+显示三层接口的IP基本配置信息:display ip interface [ interface-type [ interface-number ] ] brief [ | { begin | exclude | include } regular-expression ];
+```
+2. VLAN的划分
+```bash
+进入系统视图: system-view;
+创建VLAN: vlan vlan-id1 [; to vlan-id2 ]
+指定当前VLAN的名称: name text;
+为VLAN指定一个描述字符串: description text;
+
+配置基于Access端口的VLAN:
+进入VLAN视图:vlan vlan-id
+进入以太网接口视图:interface interface-type interface-number;
+进入端口组视图:port-group manual port-group-name;
+进入二层聚合接口视图:interface bridge-aggregation interface-number;
+配置端口的链路类型为Access类型:port link-type access;
+将当前Access端口加入到指定VLAN:port access vlan vlan-id;
