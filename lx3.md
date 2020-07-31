@@ -3,10 +3,8 @@
 ### Ansible的安装和基础知识
 ```bash
 Ansible的优点：
-1. 仅需管理主机安装并配置即可，所有的配置工作都通过ssh连接下发至被管理主机。
-轻量化
-2. Python编写，源代码可读性强。同时playbook使用yml配置，容易上手
-对于集群和ECS的支持非常完美。
+1. 仅需管理主机安装并配置即可，所有的配置工作都通过ssh连接下发至被管理主机。轻量化
+2. Python编写，源代码可读性强。同时playbook使用yml配置，容易上手对于集群和ECS的支持非常完美。
 3. 支持大量API接入，并且对于python的扩展支持良好。
 4. 由于架构出色，理论上在管理主机性能到位的情况下可以同时配置近乎无限的主机。
 ```
@@ -148,3 +146,14 @@ IP地址的显示:
 进入二层聚合接口视图:interface bridge-aggregation interface-number;
 配置端口的链路类型为Access类型:port link-type access;
 将当前Access端口加入到指定VLAN:port access vlan vlan-id;
+```
+## 第五天
+### Linux的文件传输
+```bash
+1. 安装传输包：yum install -y lrzsz；
+rz：将本机的文件传输到Linux操作系统上；
+sz：将Linux操作系统上的文件传输到本机上；
+
+2. Linux中的公钥生成:
+ssh-keygen -t rsa -C "your_email@youremail.com"（-C 后面可以自行定义，也可以不写）；
+```
