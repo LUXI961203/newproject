@@ -105,7 +105,7 @@ while True:
         ming -= 1
     else:
         print ("猜对了！")
-        brea
+        break
 ```
 ## 第三天
 ### Python中字符串的方法
