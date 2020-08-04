@@ -27,6 +27,19 @@ scp root@www.test.com:/val/test/test.tar.gz /val/test/
 6. 远程复制本地文件到指定目录：（把本地的文件复制到远程主机上）
 scp /val/test.tar.gz root@www.test.com:/val/
 ```
-
-
-
+## 第二天
+### 将镜像写入U盘
+```bash
+1. 下载镜像到指定文件夹，然后执行下列命令；
+2. dd if=/root/centos6.8.iso of=/dev/sdb
+```
+```bash
+1. centos.6的装机
+第一步：进入U盘系统；
+第二步：划分一个40000MB根（/）分区和一个8000MBswap分区；
+第三步：重启；
+2.centos.7的装机
+第一步：进入U盘系统；
+第二步：划分一个40G的根（/）分区和一个8Gswap分区；
+第三步：配置开机密码；
+```
