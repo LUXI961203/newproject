@@ -56,6 +56,39 @@ RAID10：RAID 10 技术需要至少 4 块硬盘来组建，其中先分别两两
 优点：底层可以坏不同阵列的两块盘，注意两块盘不能坏在同一边；
 
 ## 第四天
-惠普服务器读取不到硬盘解决方法：
+### 惠普服务器读取不到硬盘解决方法：
 1. 将光卡禁用后，重启服务器；
 2. 然后将服务器改为直通类型，再次重启；
+
+## 第五天
+1. 磁盘阵列的创建
+```bash
+fdisk /dev/sda
+n->t->fd
+[root@teacher Desktop]# partprobe /dev/sda
+
+[root@teacher Desktop]# mdadm -C /dev/md0 -l5 -n3 -x1 /dev/sda[5-8]     
+-C:创建   md代表做出来的阵列盘符,0代表第一个盘符   -l代表级别  -n运行 -x备份，如果没有备份就不写
+
+[root@teacher Desktop]# mdadm -D /dev/md0                 #查看详细信息
+[root@teacher Desktop]# watch -n1 mdadm -D /dev/md0       #一秒看一次
+
+[root@teacher Desktop]# mkfs.ext4 /dev/md0                #格式化
+[root@teacher Desktop]# mkdir /mnt/md0              
+[root@teacher Desktop]# mount /dev/md0 /mnt/md0/          #临时挂载
+[root@teacher Desktop]# cp /etc/*.conf /mnt/md0/
+
+[root@teacher Desktop]# mdadm /dev/md0 -f /dev/sda7       #损坏一块硬盘
+mdadm: set /dev/sda7 faulty in /dev/md0
+
+[root@teacher Desktop]# mdadm /dev/md0 -r /dev/sda7       #移除
+mdadm: hot removed /dev/sda7 from /dev/md0
+ 
+[root@teacher Desktop]# mkfs.ext4 /dev/sda7
+[root@teacher Desktop]# mdadm /dev/md0 -a /dev/sda7       #添加
+mdadm: added /dev/sda7
+[root@teacher Desktop]# mdadm -D /dev/md0
+
+[root@teacher Desktop]# umount /mnt/md0/
+[root@teacher Desktop]# mkfs.ext4 /dev/md0                #重新格式化
+```
